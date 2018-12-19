@@ -1,16 +1,17 @@
 ﻿@page
-@model CRUD_Razor_2_1.Pages.BookList.CreateModel
+@model CRUD_Razor_2_1.Pages.BookList.EditModel
 @{
     ViewData["Title"] = "Create";
 }
 <br />
-<h2>Create book</h2>
+<h2>Edit book</h2>
 
 <br />
 
 <div style="border:1px solid #bbb9b9; border-radius: 10px;">
     <form method="post">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input hidden asp-for="Book.Id" />
         <div class="row" style="padding: 30px">
             <div class="form-group">
                 <div class="row">
@@ -47,7 +48,7 @@
             </div>
             <br />
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary btn-sm" />
+                <input type="submit" value="Update" class="btn btn-primary btn-sm" />
                 <a asp-page="Index" class="btn btn-success btn-sm">Back to list</a>
             </div>
         </div>

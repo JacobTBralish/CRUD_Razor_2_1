@@ -20,6 +20,10 @@ namespace CRUD_Razor_2_1.Pages.BookList
          *****SIMPLE TERMS: IEnumerable makes using foreach possible on the collection*/
         public IEnumerable<Book> Books { get; set; }
 
+        // This name MUST be the same as it is in the create.cshtml.cs class because this message is relating to that
+        [TempData]
+        public string Message { get; set; }
+
         // This is creating an instance of the database so that we can retrive it,
         public IndexModel(ApplicationDbContext db)
         {
@@ -31,6 +35,18 @@ namespace CRUD_Razor_2_1.Pages.BookList
             /* Async method used to get the books and stored to the IEnumerable.
              _db.Books is coming from the ApplicationDbContext which is the DbSet.*/
             Books = await _db.Books.ToListAsync();
+        }
+
+        // Here you pass it id because thats how you are deleting the book in the index.html
+        public async Task<IActionResult> OnPostDelete(int id)
+        {
+            var book = await _db.Books.FindAsync(id);
+            _db.Books.Remove(book);
+            await _db.SaveChangesAsync();
+
+            Message = "Book successfully deleted";
+
+            return RedirectToPage("Index");
         }
     }
 }

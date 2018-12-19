@@ -20,6 +20,9 @@ namespace CRUD_Razor_2_1.Pages.BookList
         [BindProperty]
         public Book Book { get; set; }
 
+        [TempData]
+        public string Message { get; set; }
+
         public void OnGet()
         {
 
@@ -39,6 +42,7 @@ namespace CRUD_Razor_2_1.Pages.BookList
 
             _db.Books.Add(Book);
             await _db.SaveChangesAsync();
+            Message = "Book has successfully been created";
             return RedirectToPage("Index");
         }
     }
